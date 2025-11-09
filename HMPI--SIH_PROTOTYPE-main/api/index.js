@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection
+
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/hmpi';
 let isConnected = false;
 
@@ -28,12 +28,12 @@ const connectDB = async () => {
   }
 };
 
-// Models
+
 const Location = require('../server/models/Location');
 const Measurement = require('../server/models/Measurement');
 const { calculateIndices } = require('../server/utils/calculations');
 
-// Health check
+
 app.get('/api/health', async (req, res) => {
   await connectDB();
   res.json({ 
@@ -43,7 +43,7 @@ app.get('/api/health', async (req, res) => {
   });
 });
 
-// Locations endpoints
+
 app.get('/api/locations', async (req, res) => {
   try {
     await connectDB();
@@ -71,7 +71,7 @@ app.post('/api/locations', async (req, res) => {
   }
 });
 
-// Measurements endpoints
+
 app.get('/api/measurements', async (req, res) => {
   try {
     await connectDB();
@@ -113,7 +113,7 @@ app.post('/api/measurements', async (req, res) => {
   }
 });
 
-// Analytics endpoints
+
 app.get('/api/analytics/stats', async (req, res) => {
   try {
     await connectDB();
